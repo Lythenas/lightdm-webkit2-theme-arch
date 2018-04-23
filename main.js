@@ -26,6 +26,9 @@ function getImg() {
 }
 
 window.onload = function() {
+    var log = document.getElementById("log");
+    log.textContent = JSON.stringify(lightdm);
+
     getImg();
     input.focus();
     input.select();

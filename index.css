@@ -4,6 +4,11 @@ body {
     color: #ededed;
 }
 
+#log {
+    color: red;
+    text-shadow: white 0 0 2px;
+}
+
 #input {
     color: #ededed;
     background-color: #101010;
