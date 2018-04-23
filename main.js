@@ -27,7 +27,10 @@ function getImg() {
 
 window.onload = function() {
     var log = document.getElementById("log");
-    log.textContent = JSON.stringify(lightdm);
+    var debug = lightdm;
+    debug.layout = null;
+    debug.languages = null;
+    log.textContent = JSON.stringify(debug);
 
     getImg();
     input.focus();
