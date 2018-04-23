@@ -33,8 +33,8 @@ window.onload = function() {
     input.focus();
     input.select();
 
-    if (lightdm.autologin_user !== null) {
-       authenticate(lightdm.autologin_user); 
+    if (lightdm.lock_hint) {
+       authenticate(lightdm.select_user); 
     }
 }
 
