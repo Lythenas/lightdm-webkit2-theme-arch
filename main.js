@@ -26,18 +26,13 @@ function getImg() {
 }
 
 window.onload = function() {
-    var log = document.getElementById("log");
-    var debug = lightdm;
-    debug.layout = null;
-    debug.languages = null;
-    log.textContent = JSON.stringify(debug);
-
     getImg();
     input.focus();
     input.select();
 
     if (lightdm.lock_hint) {
-       authenticate(lightdm.select_user); 
+    	authenticate(lightdm.select_user); 
+	// TODO maybe display name somewhere
     }
 }
 
