@@ -1,3 +1,4 @@
+var user = undefined;
 var input = document.getElementById("input");
 input.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
@@ -38,7 +39,9 @@ window.onload = function() {
     input.focus();
     input.select();
 
-    if (lightdm.lock_hint) {
+    if (user !== undefined) {
+        authenticate(user);
+    } else if (lightdm.lock_hint) {
         var user = lightdm.select_user || lightdm.select_user_hint || first_user();
     	authenticate(user); 
 	// TODO maybe display name somewhere
