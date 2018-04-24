@@ -25,13 +25,22 @@ function getImg() {
         "url(wallpapers/" + pad(index, 2) + ".png)";
 }
 
+function first_user() {
+    var first = lightdm.users[0];
+    if (first !== undefined) {
+        return first.username;
+    }
+    return null;
+}
+
 window.onload = function() {
     getImg();
     input.focus();
     input.select();
 
     if (lightdm.lock_hint) {
-    	authenticate(lightdm.select_user); 
+        var user = lightdm.select_user || lightdm.select_user_hint || first_user();
+    	authenticate(user); 
 	// TODO maybe display name somewhere
     }
 }
