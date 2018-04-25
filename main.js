@@ -34,7 +34,7 @@ function first_user() {
     return null;
 }
 
-window.onload = function() {
+$(function() {
     getImg();
     input.focus();
     input.select();
@@ -46,7 +46,7 @@ window.onload = function() {
     	authenticate(user); 
 	// TODO maybe display name somewhere
     }
-}
+});
 
 function authenticate(input_text) {
     if(!lightdm.in_authentication) {
