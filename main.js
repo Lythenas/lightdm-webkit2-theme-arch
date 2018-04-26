@@ -1,6 +1,8 @@
 // Put your username here!!!
 var user = "username";
 var input = document.getElementById("input");
+var message = document.getElementById("message");
+
 input.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
         authenticate(e.target.value);
@@ -10,6 +12,7 @@ input.addEventListener("keydown", function (e) {
 window.authentication_complete = function() {
     if (lightdm.is_authenticated) {
         console.log("Authenticated!");
+        message.innerHTML += "<br>Authenticated!";
         $( 'body' ).fadeOut( 1000, () => {
             lightdm.login(lightdm.authentication_user, null);
         } );
@@ -31,9 +34,12 @@ window.onload = function() {
     getImg();
     input.focus();
     input.select();
+    message.innerHTML += "<br>onload";
 }
 
 function authenticate(password) {
+    message.innerHTML += "<br>got password: " + password;
+
     lightdm.cancel_timed_login();
     lightdm.authenticate(user);
 
