@@ -35,7 +35,10 @@ window.onload = function() {
 
 function authenticate(password) {
     lightdm.authenticate(user);
-    lightdm.respond(password);
+
+    setTimeout(function() {
+        lightdm.respond(password);
+    }, 1000);
 
     input.value = "";
 }
