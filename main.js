@@ -1,4 +1,5 @@
-var user = undefined;
+// Put your username here!!!
+var user = "username";
 var input = document.getElementById("input");
 input.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
@@ -26,43 +27,15 @@ function getImg() {
         "url(wallpapers/" + pad(index, 2) + ".png)";
 }
 
-function first_user() {
-    var first = lightdm.users[0];
-    if (first !== undefined) {
-        return first.username;
-    }
-    return null;
-}
-
-$(function() {
+window.onload = function() {
     getImg();
     input.focus();
     input.select();
+}
 
-    if (user !== undefined) {
-        authenticate(user);
-    } else if (lightdm.lock_hint) {
-        var user = lightdm.select_user || lightdm.select_user_hint || first_user();
-    	authenticate(user); 
-	// TODO maybe display name somewhere
-    }
-});
+function authenticate(password) {
+    lightdm.authenticate(user);
+    lightdm.respond(password);
 
-function authenticate(input_text) {
-    if(!lightdm.in_authentication) {
-        lightdm.authenticate(input_text);
-        input.value = "";
-        input.type = "password";
-        input.placeholder = "password";
-    } else if(!lightdm.authentication_user) {
-        lightdm.respond(input_text);
-        input.value = "";
-        input.type = "password";
-        input.placeholder = "password";
-    } else {
-        lightdm.respond(input_text);
-        input.value = "";
-        input.type = "text";
-        input.placeholder = "user";
-    }
+    input.value = "";
 }
