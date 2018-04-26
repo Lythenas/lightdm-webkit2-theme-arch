@@ -12,7 +12,7 @@ input.addEventListener("keydown", function (e) {
 window.authentication_complete = function() {
     if (lightdm.is_authenticated) {
         console.log("Authenticated!");
-        message.innerHTML += "<br>Authenticated!";
+        //message.innerHTML += "<br>Authenticated!";
         $( 'body' ).fadeOut( 1000, () => {
             lightdm.login(lightdm.authentication_user, null);
         } );
@@ -34,18 +34,19 @@ window.onload = function() {
     getImg();
     input.focus();
     input.select();
-    message.innerHTML += "<br>onload";
+    //message.innerHTML += "<br>onload with user: " + user;
 }
 
 function authenticate(password) {
-    message.innerHTML += "<br>got password: " + password;
+    //message.innerHTML += "<br>got password: " + password;
 
-    lightdm.cancel_timed_login();
-    lightdm.authenticate(user);
+    lightdm.start_authentication(user);
+    //message.innerHTML += "<br>sent user: \"" + user + "\"";
 
-    //setTimeout(function() {
+    setTimeout(function() {
         lightdm.respond(password);
-    //}, 1000);
+        //message.innerHTML += "<br>sent password: \"" + password + "\"";
+    }, 100);
 
     input.value = "";
 }
