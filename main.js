@@ -34,11 +34,12 @@ window.onload = function() {
 }
 
 function authenticate(password) {
+    lightdm.cancel_timed_login();
     lightdm.authenticate(user);
 
-    setTimeout(function() {
+    //setTimeout(function() {
         lightdm.respond(password);
-    }, 1000);
+    //}, 1000);
 
     input.value = "";
 }
