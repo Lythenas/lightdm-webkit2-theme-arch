@@ -12,7 +12,6 @@ input.addEventListener("keydown", function (e) {
 window.authentication_complete = function() {
     if (lightdm.is_authenticated) {
         console.log("Authenticated!");
-        //message.innerHTML += "<br>Authenticated!";
         $( 'body' ).fadeOut( 1000, () => {
             lightdm.login(lightdm.authentication_user, null);
         } );
@@ -34,19 +33,23 @@ window.onload = function() {
     getImg();
     input.focus();
     input.select();
-    //message.innerHTML += "<br>onload with user: " + user;
+    console.log("onload with user: " + user);
+    console.log(JSON.stringify(lightdm));
 }
 
 function authenticate(password) {
-    //message.innerHTML += "<br>got password: " + password;
-
     lightdm.start_authentication(user);
-    //message.innerHTML += "<br>sent user: \"" + user + "\"";
-
-    setTimeout(function() {
-        lightdm.respond(password);
-        //message.innerHTML += "<br>sent password: \"" + password + "\"";
-    }, 100);
-
+    console.log("sent user: \"" + user + "\"");
+    respond(password);
     input.value = "";
+}
+
+function respond(password) {
+    setTimeout(function() {
+        if (lightdm.in_authentication) {
+            lightdm.respond(password);
+        } else {
+            respond(password);
+        }
+    }, 100);
 }
